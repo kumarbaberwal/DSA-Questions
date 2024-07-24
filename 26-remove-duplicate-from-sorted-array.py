@@ -15,9 +15,16 @@ def removeDuplicates(nums: list[int]) -> int:
             nums[k] = nums[i]
             k += 1
 
-    return nums
+    # unique = list(set(nums))
+    # for i in range(len(unique)):
+    #     nums[i] = unique[i]
+
+    # return nums
 
 if __name__ == "__main__":
     nums = [1, 1, 2]
     nums = [0,0,1,1,1,2,2,3,3,4]
+    # unique = set(nums)
+    # print(unique.pop())
+    # print(unique.pop())
     print(f'The Unique Values in given array is : {removeDuplicates(nums)}')
