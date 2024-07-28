@@ -62,7 +62,7 @@ def dijkstra(src):
 result, min_count = -1, n
 for src in range(n):
     count = dijkstra(src)
-    if count <= distanceThreshold:
+    if count <= min_count:
         result, min_count = src, count
 
 print(result)
