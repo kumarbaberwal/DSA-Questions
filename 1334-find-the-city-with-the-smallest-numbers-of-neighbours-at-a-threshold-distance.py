@@ -30,3 +30,39 @@ City 4 -> [City 1, City 2, City 3]
 The city 0 has 1 neighboring city at a distanceThreshold = 2.
 
 """
+
+from collections import defaultdict
+import heapq
+
+n = 4
+edges = [[0,1,3],[1,2,1],[1,3,4],[2,3,1]]
+distanceThreshold = 4
+
+
+adj = defaultdict(list)
+
+for v1, v2, dist in edges:
+    adj[v1].append((v2, dist))
+    adj[v2].append((v1, dist))
+
+def dijkstra(src):
+    heap = [(0, src)]
+    visit = set()
+    while heap:
+        dist, node = heapq.heappop(heap)
+        if node in visit:
+            continue
+        visit.add(node)
+        for nei, dist2 in adj[node]:
+            nei_dist = dist + dist2
+            if nei_dist <= distanceThreshold:
+                heapq.heappush(heap, (nei_dist, nei))
+    return len(visit) - 1
+
+result, min_count = -1, n
+for src in range(n):
+    count = dijkstra(src)
+    if count <= distanceThreshold:
+        result, min_count = src, count
+
+print(result)
