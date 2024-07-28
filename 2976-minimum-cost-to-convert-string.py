@@ -35,3 +35,45 @@ Explanation: It is impossible to convert source to target because the value at i
 
 """
 
+from collections import defaultdict
+import heapq
+
+
+source = "abcd"
+target = "acbe"
+original = ["a","b","c","c","e","d"]
+changed = ["b","c","b","e","b","e"]
+cost = [2,5,5,1,2,20]
+
+adj = defaultdict(list)
+
+for src, dest, curcost in zip(original, changed, cost):
+    adj[src].append((dest, curcost))
+
+print(adj)
+
+def dijkstra(src):
+    heap = [(0, src)]
+    min_cost_map = {}
+    while heap:
+        cost, node = heapq.heappop(heap)
+
+        if node in min_cost_map:
+            continue
+        min_cost_map[node] = cost
+        for nei, nei_cost in adj[node]:
+            heapq.heappush(heap, (nei_cost + cost, nei))
+    return min_cost_map
+
+min_cost_maps = {c: dijkstra(c) for c in set(source)}
+
+print(min_cost_maps)
+
+result = 0
+for src, dest in zip(source, target):
+    if dest not in min_cost_maps[src]:
+        print(-1)
+
+    result += min_cost_maps[src][dest]
+
+print(result)
