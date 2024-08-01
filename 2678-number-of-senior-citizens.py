@@ -19,3 +19,20 @@ Input: details = ["1313579440F2036","2921522980M5644"]
 Output: 0
 Explanation: None of the passengers are older than 60.
 """
+
+class Solution:
+    def countSeniors(self, details: list[str]) -> int:
+        count = 0
+        for detail in details:
+            if int(detail[11:13]) > 60:
+                count += 1
+        return count
+        
+
+if __name__ == "__main__":
+    details = [
+        "1313579440F2036",
+        "2921522980M5644"
+        ]
+    # details = ["7868190130M7522","5303914400F9211","9273338290F4010"]
+    print(Solution().countSeniors(details))
