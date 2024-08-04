@@ -24,13 +24,25 @@ Explanation: In this case, no transactions are done and the max profit = 0.
 
 class Solution:
     def maxProfit(self, prices: list[int]) -> int:
-        buyPrice = prices[0]
-        maxProfit = 0
-        for price in prices[1:]:
-            if buyPrice > price:
-                buyPrice = price
-            maxProfit = max(maxProfit, price - buyPrice)
-        return maxProfit
+        l, r = 0, 1
+        maxp = 0
+        while r < len(prices):
+            if prices[l] < prices[r]:
+                profit =  prices[r] - prices[l]
+                maxp = max(maxp, profit)
+            else:
+                l = r
+            r += 1
+        return maxp
+
+
+        # buyPrice = prices[0]
+        # maxProfit = 0
+        # for price in prices[1:]:
+        #     if buyPrice > price:
+        #         buyPrice = price
+        #     maxProfit = max(maxProfit, price - buyPrice)
+        # return maxProfit
 
 
         # i, j = 0, len(prices) - 1
@@ -49,4 +61,5 @@ if __name__ == "__main__":
     # prices = [7,6,4,3,1]
     # prices = [1,2]
     # print(len(prices))
+    prices = [1,2,4,2,5,7,2,4,9,0,9]
     print(Solution().maxProfit(prices))
