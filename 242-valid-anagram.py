@@ -35,7 +35,6 @@ class Solution:
             s_dict[char] -= 1
 
         return True
-
 if __name__ == "__main__":
     s = "anagram"
     t = "nagaram"
